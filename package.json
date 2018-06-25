@@ -1,0 +1,23 @@
+{
+  "name": "automata",
+  "version": "0.0.0",
+  "description": "An attempt to make a visual lisp style language",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avynn/Automata.git"
+  },
+  "author": "Avynn Donaghe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Avynn/Automata/issues"
+  },
+  "homepage": "https://github.com/Avynn/Automata#readme",
+  "devDependencies": {
+    "electron": "^2.0.3"
+  }
+}
