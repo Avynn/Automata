@@ -8,7 +8,7 @@ execution of programs.
 
 //constructor definition
 
-function closure (next, func){
+let closure = function (next, func){
     /*
     (closure next, any func)->obj<closure>
 
@@ -39,8 +39,8 @@ closure.evaluate = function(){
         this.args.push(curr);
     } 
 
-    if(!(typeof(this.func) == typeof(closure))){
-        this.evaluated = this.func.evaluate()
+    if(typeof(this.func) != typeof(closure)){
+        this.func = this.func.evaluate();
     }
     
 }
@@ -55,6 +55,8 @@ closure.addArg = function(closure, pos){
 
     this.args[pos] = closure;
 }
+
+
 
 
 //primitives 
@@ -76,5 +78,9 @@ function rest(closure){
     return closure.adjHead;
 }
 
-
-
+//Module exports
+module.exports = {
+    instance: closure,
+    head: head,
+    rest: rest
+};
