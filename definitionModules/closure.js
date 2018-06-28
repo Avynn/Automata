@@ -39,7 +39,7 @@ closure.evaluate = function(){
         this.args.push(curr);
     } 
 
-    if(typeof(this.func) != typeof(closure)){
+    if(typeof(this.func) == typeof(closure)){
         this.func = this.func.evaluate();
     }
     
