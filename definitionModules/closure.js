@@ -9,7 +9,7 @@ execution of programs.
 //constructor definition
 
 let closure = class {
-    constructor(next, func){
+    constructor(next, func, name){
     /*
     (closure next, any func)->obj<closure>
 
@@ -21,6 +21,7 @@ let closure = class {
     this.args = [];
     this.next = next;
     this.func = func;
+    this.name = name;
     }
 
     evaluate(){
@@ -32,8 +33,10 @@ let closure = class {
         */
     
         //TODO: add check that arguments are continuous accross the list.
+
+        //TODO: arguments need to interact with closures
     
-        if(typeof(this.args[0]) != undefined && typeof(this.args[0]) != null){
+        if(typeof(this.args[0]) != typeof(undefined)){
             let curr = args.pop().evaluate();
             this.args.push(curr);
         } 
@@ -41,7 +44,7 @@ let closure = class {
         if(typeof(this.func) == typeof(closure)){
             this.func = this.func.evaluate();
         } else {
-            return this;
+            return this.func;
         }
     }
 
@@ -54,6 +57,10 @@ let closure = class {
         */
 
         this.args[pos] = closure;
+    }
+
+    getArg(pos){
+        return this.args[pos];
     }
 }
 
