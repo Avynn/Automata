@@ -8,7 +8,8 @@ execution of programs.
 
 //constructor definition
 
-let closure = function (next, func){
+let closure = class {
+    constructor(next, func){
     /*
     (closure next, any func)->obj<closure>
 
@@ -20,67 +21,42 @@ let closure = function (next, func){
     this.args = [];
     this.next = next;
     this.func = func;
-}
-
-//closure evaluator function and helpers.
-
-closure.evaluate = function(){
-    /*
-    (closure args)->closure
-
-    This function evaluates all parameters
-    and then evaluates the closure
-    */
-
-    //TODO: add check that arguments are continuous accross the list.
-
-    if(args[0]){
-        let curr = args.pop().evaluate();
-        this.args.push(curr);
-    } 
-
-    if(typeof(this.func) == typeof(closure)){
-        this.func = this.func.evaluate();
     }
+
+    evaluate(){
+        /*
+        (closure args)->closure
     
+        This function evaluates all parameters
+        and then evaluates the closure
+        */
+    
+        //TODO: add check that arguments are continuous accross the list.
+    
+        if(typeof(this.args[0]) != undefined && typeof(this.args[0]) != null){
+            let curr = args.pop().evaluate();
+            this.args.push(curr);
+        } 
+    
+        if(typeof(this.func) == typeof(closure)){
+            this.func = this.func.evaluate();
+        } else {
+            return this;
+        }
+    }
+
+    addArg(closure, pos){
+        /*
+        (closure closure, int pos)->null
+
+        This function adds an argument reference
+        to the closure in position pos
+        */
+
+        this.args[pos] = closure;
+    }
 }
 
-closure.addArg = function(closure, pos){
-    /*
-    (closure closure, int pos)->null
-
-    This function adds an argument reference
-    to the closure in position pos
-    */
-
-    this.args[pos] = closure;
-}
-
-
-
-
-//primitives 
-
-
-
-//Utitlity/debugging functions bandaids for now
-
-
-closure.setNext = function(closure){
-    this.next = closure;
-}
-
-function head(closure){
-    return closure;
-}
-
-function rest(closure){
-    return closure.adjHead;
-}
 
 //Module exports
-module.exports = {
-    instance: closure,
-    head: head,
-    rest: rest
-};
+module.exports = closure;
