@@ -42,7 +42,7 @@ let closure = class {
         } 
     
         if(this.name != "numBuff"){
-            this.func = this.func.evaluate();
+            return this.func.evaluate();
         } else {
             return this;
         }

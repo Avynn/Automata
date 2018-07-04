@@ -17,15 +17,15 @@ function testException(value, expected, actual){
     }
 }
 
-function assertTrue(expr){
-    let result = expr();
+// function assertTrue(expr){
+//     let result = expr();
 
-    if(result){
-        return true;
-    } else {
-        throw new testException("Assertion failed", "true", "expression resolved to false");
-    }
-}
+//     if(result){
+//         return true;
+//     } else {
+//         throw new testException("Assertion failed", "true", "expression resolved to false");
+//     }
+// }
 
 function assertEqual(arg1, arg2, compare){
     let cmp  = compare(arg1, arg2);
@@ -45,12 +45,15 @@ function testMain(){
     if(!oneClosureEvaluatesTheOther()) {
         console.log("test failed.");
         return
-    } else if(!passingArgumentstoadd(0)){
+    } else if(!passingArgumentstoadd(1000)){
         console.log("test failed");
-    } else {
+    } else if(!passingArgumentstoMult(1000)) {
+        console.log("test failed");
+    }else {
         console.log("all tests passed");
         return
     }
+    return
 }
 
 //Closure eval tests
@@ -65,8 +68,8 @@ function oneClosureEvaluatesTheOther(){
 }
 
 function passingArgumentstoadd(iterations){
-    let randOne = Math.floor(Math.random() * 10000) - 5000;
-    let randTwo = Math.floor(Math.random() * 10000) - 5000; 
+    let randOne = (Math.random() * 10000) - 5000;
+    let randTwo = (Math.random() * 10000) - 5000; 
     let numOne = new ops.numBuff(null, randOne);
     let numTwo = new ops.numBuff(null, randTwo)
     let func = new ops.add();
@@ -78,7 +81,25 @@ function passingArgumentstoadd(iterations){
     if(iterations == 0){
         return assertEqual(mainfunc.evaluate(), new ops.numBuff(null, (randOne + randTwo)), testCompare);
     } else {
-        return assertEqual(mainfunc.evaluate(), new ops.numBuff(null, (randOne + randTwo)), testCompare); // && passingArgumentstoadd(iterations - 1);
+        return assertEqual(mainfunc.evaluate(), new ops.numBuff(null, (randOne + randTwo)), testCompare) && passingArgumentstoadd(iterations - 1);
+    }   
+}
+
+function passingArgumentstoMult(iterations){
+    let randOne = (Math.random() * 10000) - 5000;
+    let randTwo = (Math.random() * 10000) - 5000; 
+    let numOne = new ops.numBuff(null, randOne);
+    let numTwo = new ops.numBuff(null, randTwo)
+    let func = new ops.multiply();
+    func.addArg(numOne, 0);
+    func.addArg(numTwo, 1);
+
+    var mainfunc = new closure(null, func, "main");
+    
+    if(iterations == 0){
+        return assertEqual(mainfunc.evaluate(), new ops.numBuff(null, (randOne * randTwo)), testCompare);
+    } else {
+        return assertEqual(mainfunc.evaluate(), new ops.numBuff(null, (randOne * randTwo)), testCompare) && passingArgumentstoMult(iterations - 1);
     }   
 }
 
