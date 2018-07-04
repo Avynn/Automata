@@ -41,10 +41,10 @@ let closure = class {
             this.args.push(curr);
         } 
     
-        if(typeof(this.func) == typeof(closure)){
+        if(this.name != "numBuff"){
             this.func = this.func.evaluate();
         } else {
-            return this.func;
+            return this;
         }
     }
 
