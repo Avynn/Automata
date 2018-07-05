@@ -12,7 +12,7 @@ function createWindow() {
                                     devTools: true
                                 }});
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     //load index
     win.loadFile('index.html');
