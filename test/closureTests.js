@@ -7,25 +7,7 @@ as a closure within normal JS.
 
 let closure = require('../definitionModules/closure.js');
 let ops = require('../definitionModules/ops.js');
-
-function testException(value, expected, actual){
-    this.value = value;
-    this.expected = expected;
-    this.actual = actual;
-    this.toString = function(){
-        return this.value + "\n" +"expected:" + this.expected.toString() + "\n actual:" + this.actual.toString();
-    }
-}
-
-// function assertTrue(expr){
-//     let result = expr();
-
-//     if(result){
-//         return true;
-//     } else {
-//         throw new testException("Assertion failed", "true", "expression resolved to false");
-//     }
-// }
+var assert = require('assert');
 
 function assertEqual(arg1, arg2, compare){
     let cmp  = compare(arg1, arg2);
@@ -39,21 +21,6 @@ function assertEqual(arg1, arg2, compare){
 
 function testCompare(closOne, closTwo){
     return closOne.func - closTwo.func;
-}
-
-function testMain(){
-    if(!oneClosureEvaluatesTheOther()) {
-        console.log("test failed.");
-        return
-    } else if(!passingArgumentstoadd(1000)){
-        console.log("test failed");
-    } else if(!passingArgumentstoMult(1000)) {
-        console.log("test failed");
-    }else {
-        console.log("all tests passed");
-        return
-    }
-    return
 }
 
 //Closure eval tests
@@ -103,4 +70,16 @@ function passingArgumentstoMult(iterations){
     }   
 }
 
-testMain();
+
+describe('closure', function (){
+    describe('one closure evaluatates the other', function(){
+        it("should return true as part of the assert equal func", function(){
+            assert.equal(oneClosureEvaluatesTheOther(), true);
+        });
+    });
+    describe('passingArgumentstoadd', function(){
+        it('should return true as part of the assert equal func', function(){
+            assert.equal(passingArgumentstoadd(100), true);
+        });
+    });
+});
