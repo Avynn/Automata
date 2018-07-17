@@ -1,4 +1,5 @@
 const electron = require ('electron');
+const libarary = require('./definitionModules/library.js');
 
 function printmsg(_, msg) {
     console.log(msg);
@@ -18,6 +19,14 @@ function createWindow() {
     win.loadFile('index.html');
 }
 
-electron.ipcMain.on("console", printmsg);
+function initLib(){
+    return new libarary();
+}
 
-electron.app.on('ready', createWindow);
+function main(){
+    createWindow();
+    var Library = new Library()
+
+}
+
+electron.app.on('ready', main);

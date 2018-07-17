@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Avynn/Automata#readme",
   "devDependencies": {
+    "@tyriar/avl-tree": "^2.0.4",
     "electron": "^2.0.4",
     "mocha": "^5.2.0",
     "spectron": "^3.8.0"

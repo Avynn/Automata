@@ -97,6 +97,23 @@ class windowManager {
             this.drawAllInner(head.getNext());
         }
     }
+
+    addNewElement(elm){
+        if(this.head == null){
+            this.head = elm;
+        } else {
+            this.addNewElementInner(elm, this.head);
+        }
+    }
+
+    addNewElementInner(elm, head){
+        if(head.getNext() == null){
+            head.setNext(elm);
+        } else {
+            addNewElementInner(elm, head.getNext());
+        }
+
+    }
 }
 
 function init(){

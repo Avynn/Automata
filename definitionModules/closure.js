@@ -62,6 +62,14 @@ let closure = class {
     getArg(pos){
         return this.args[pos];
     }
+
+    getName(){
+        return this.name;
+    }
+
+    setName(name){
+        this.name = name;
+    }
 }
 
 

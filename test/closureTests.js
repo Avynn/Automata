@@ -82,4 +82,9 @@ describe('closure', function (){
             assert.equal(passingArgumentstoadd(100), true);
         });
     });
+    describe('passingArgumentstoMult', function(){
+        it('should return true as part of the assert equal func', function(){
+            assert.equal(passingArgumentstoMult(10), true);
+        })
+    })
 });
