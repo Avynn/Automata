@@ -38,4 +38,5 @@ describe('Application launch', function () {
             assert.equal(count, 2);
         });
     });
+
 })
