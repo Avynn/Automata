@@ -6,7 +6,41 @@ in memory.  This is the core of the program and defines the behavior of
 execution of programs.
 */
 
-//constructor definition
+let closureRef = class {
+    constructor(ref, name){
+        this.ref = ref;
+        this.name = name;
+        this.next = null;
+        this.args = null;
+        this.adjacent = null;
+    }
+
+    eval(){
+        this.ref = this.ref.evaluate(this.args);
+        this.name = this.ref.getName();
+    }
+
+    getRef(){
+        return this.ref;
+    }
+
+    getName(){
+        return this.name;
+    }
+
+    setName(name){
+        this.name = name;
+    }
+
+    getNext(){
+        return this.next;
+    }
+
+    setNext(next){
+        this.next = next;
+    }
+}
+
 
 let closure = class {
     constructor(next, func, name){
@@ -18,49 +52,58 @@ let closure = class {
     or another closure.
     */
 
-    this.args = [];
+
     this.next = next;
     this.func = func;
     this.name = name;
     }
 
-    evaluate(){
+    evaluate(args){
         /*
         (closure args)->closure
     
         This function evaluates all parameters
         and then evaluates the closure
         */
-    
-        //TODO: add check that arguments are continuous accross the list.
 
-        //TODO: arguments need to interact with closures
+        var args;
     
-        if(typeof(this.args[0]) != typeof(undefined)){
-            let curr = args.pop().evaluate();
-            this.args.push(curr);
-        } 
+        if(typeof(args) != typeof(null)){
+            args = this.evaluateArgs(args);
+        }
     
-        if(this.name != "numBuff"){
+        if(this.name != "buffer"){
             return this.func.evaluate();
         } else {
             return this;
         }
     }
 
-    addArg(closure, pos){
-        /*
-        (closure closure, int pos)->null
-
-        This function adds an argument reference
-        to the closure in position pos
-        */
-
-        this.args[pos] = closure;
+    evaluateArgs(head){
+        if(head != null){
+            var newHead = new closureRef(head.getRef().evaluate(), null);
+            newHead.setName(newHead.getRef().getName())
+            newHead.setNext(this.evaluateArgs(head.getNext()));
+            return newHead; 
+        } else {
+            return;
+        }
     }
 
-    getArg(pos){
-        return this.args[pos];
+    getName(){
+        return this.name;
+    }
+
+    setName(name){
+        this.name = name;
+    }
+
+    getNext(){
+        return this.next;
+    }
+
+    setNext(next){
+        this.next = next;         
     }
 }
 
