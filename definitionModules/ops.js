@@ -1,8 +1,8 @@
 let closure = require('./closure.js');
 
-class numBuff extends closure {
+class buffer extends closure {
     constructor(next, number){
-        super(next, number, "numBuff");
+        super(next, number, "buffer");
     }
 }
 
@@ -53,7 +53,7 @@ class multClosures extends closure {
 }
 
 module.exports = {
-    numBuff: numBuff,
+    numBuff: buffer,
     add: addClosures,
     multiply: multClosures
 }

@@ -12,6 +12,7 @@ let closureRef = class {
         this.name = name;
         this.next = null;
         this.args = null;
+        this.adjacent = null;
     }
 
     eval(){
@@ -64,12 +65,14 @@ let closure = class {
         This function evaluates all parameters
         and then evaluates the closure
         */
+
+        var args;
     
         if(typeof(args) != typeof(null)){
-            this.evaluateArgs(args);
-        } 
+            args = this.evaluateArgs(args);
+        }
     
-        if(this.name != "numBuff"){
+        if(this.name != "buffer"){
             return this.func.evaluate();
         } else {
             return this;
